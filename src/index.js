@@ -5,9 +5,7 @@ import MediumEditorMultiPlaceholders, {
   defaultText
 } from "./MediumEditorMultiPlaceholders";
 import MediumEditorAutofocus from "./MediumEditorAutoFocus";
-
 const elements = document.querySelectorAll(".editable");
-
 const editor = new MediumEditor(elements, {
   placeholder: false,
   extensions: {
@@ -26,3 +24,5 @@ const editor = new MediumEditor(elements, {
     autofocus: new MediumEditorAutofocus()
   }
 });
+
+window.editor = editor;

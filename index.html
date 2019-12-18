@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./src/index.css" />
+    <link rel="stylesheet" href="./src/reset.css" />
+  </head>
+  <script>
+    window.addEventListener("load", function() {
+      const node = document.querySelector("iframe");
+      node.contentWindow.document.designMode = "on";
+    });
+  </script>
+  <body>
+    <iframe name="richtext" src="./src/editor.html" frameborder="1"></iframe>
+    <div class="editbox" id="richtext" contenteditable></div>
+    <button onclick="bold()">bold</button>
+
+    <div class="editable"></div>
+  </body>
+  <script>
+    function bold() {
+      // 加粗
+      document.execCommand("bold", false, null);
+    }
+
+    // 超链接
+    // document.execCommand("createlink", false, "https://www.kaola.com");
+    // 格式化为h1标题
+    // document.execCommand("formatblock", false, "<h1>");
+  </script>
+
+  <script src="./src/index.js"></script>
+</html>

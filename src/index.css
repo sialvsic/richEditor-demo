@@ -1,0 +1,17 @@
+.editbox {
+  height: 300px;
+  border: 1px solid black;
+  outline: none;
+}
+
+.editable {
+  outline: none;
+}
+
+.medium-editor-placeholder {
+  /* margin-top: 0; */
+}
+
+.medium-editor-placeholder:after {
+  margin-top: 0 !important;
+}

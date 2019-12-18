@@ -1,10 +1,10 @@
 import MediumEditor from "medium-editor";
 import "medium-editor/dist/css/medium-editor.css";
 import "medium-editor/dist/css/themes/default.min.css";
-import {
-  MediumEditorMultiPlaceholders,
+import MediumEditorMultiPlaceholders, {
   defaultText
 } from "./MediumEditorMultiPlaceholders";
+import MediumEditorAutofocus from "./MediumEditorAutoFocus";
 
 const elements = document.querySelectorAll(".editable");
 
@@ -22,6 +22,7 @@ const editor = new MediumEditor(elements, {
           text: defaultText
         }
       ]
-    })
+    }),
+    autofocus: new MediumEditorAutofocus()
   }
 });

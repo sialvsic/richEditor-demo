@@ -1,7 +1,7 @@
 import MediumEditor from "medium-editor";
 
 export const defaultText = "Tell your story...";
-export const MediumEditorMultiPlaceholders = MediumEditor.Extension.extend({
+const MediumEditorMultiPlaceholders = MediumEditor.Extension.extend({
   name: "multi_placeholder",
   init: function() {
     this.placeholderElements = [];
@@ -119,3 +119,5 @@ export const MediumEditorMultiPlaceholders = MediumEditor.Extension.extend({
     });
   }
 });
+
+export default MediumEditorMultiPlaceholders;

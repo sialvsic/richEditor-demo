@@ -25,12 +25,29 @@ const MediumEditorMultiPlaceholders = MediumEditor.Extension.extend({
     }, this);
   },
 
+  keyHandler: function() {
+    const children = this.getEditorElements()[0];
+    const isMenuExist =
+      children.querySelectorAll(".medium-insert-menu").length >= 1;
+
+    console.log(isMenuExist);
+    //如果仅剩最后一个元素，则增加一个
+    if (this.getEditorElements()[0].children.length === 1 && isMenuExist) {
+      var el = document.createElement(this.placeholders[0].tag);
+      el.appendChild(document.createElement("br"));
+      el.setAttribute("data-placeholder", this.placeholders[0].text);
+      this.getEditorElements()[0].appendChild(el);
+      this.updatePlaceholder(el, this.placeholders[0].text);
+    }
+  },
+
   watchChanges: function() {
     this.subscribe("editableInput", this.updateAllPlaceholders.bind(this));
     this.subscribe(
       "externalInteraction",
       this.updateAllPlaceholders.bind(this)
     );
+    this.subscribe("editableKeyup", this.keyHandler.bind(this));
   },
 
   destroy: function() {
@@ -107,7 +124,10 @@ const MediumEditorMultiPlaceholders = MediumEditor.Extension.extend({
             //如果内容不为空
             this.hidePlaceholder(child);
           }
-        } else if (subIndex === this.placeholders.length) {
+        } else if (
+          subIndex === this.placeholders.length &&
+          !child.classList.value.includes("medium-insert-menu")
+        ) {
           //clear the defined Place title
           this.removeEmptyPlaceHolder();
           //clear current title

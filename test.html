@@ -19,7 +19,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.iframe-transport/1.0.1/jquery.iframe-transport.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.28.0/js/jquery.fileupload.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-editor/5.23.3/js/medium-editor.min.js"></script>
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-editor-insert-plugin/2.5.0/js/medium-editor-insert-plugin.min.js"></script> -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-editor-insert-plugin/2.5.0/js/medium-editor-insert-plugin.js"></script> -->
+  <script src="./src/insert.js"></script>
 
   <script>
     window.addEventListener("load", function() {
@@ -29,7 +30,7 @@
   </script>
   <body>
     <div class="container">
-      <iframe name="richtext" src="./src/editor.html" fr ameborder="1"></iframe>
+      <iframe name="richtext" src="./src/editor.html" frameborder="1"></iframe>
       <div class="editbox" id="richtext" contenteditable></div>
       <button onclick="bold()">bold</button>
 
@@ -53,5 +54,5 @@
       console.log(window.editor.getContent());
     }
   </script>
-  <script src="./src/index.js"></script>
+  <script src="./src/test.js"></script>
 </html>

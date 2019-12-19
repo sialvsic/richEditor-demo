@@ -1,3 +1,8 @@
+.container {
+  width: 800px;
+  margin: 0 auto;
+}
+
 .editbox {
   height: 300px;
   border: 1px solid black;
@@ -6,6 +11,8 @@
 
 .editable {
   outline: none;
+  position: relative;
+  margin-left: 50px;
 }
 
 .medium-editor-placeholder {
@@ -14,4 +21,14 @@
 
 .medium-editor-placeholder:after {
   margin-top: 0 !important;
+}
+
+.medium-insert-menu {
+  position: absolute;
+  visibility: hidden;
+}
+
+.show {
+  left: -40px;
+  visibility: visible;
 }

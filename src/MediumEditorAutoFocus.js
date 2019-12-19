@@ -11,6 +11,7 @@ const MediumEditorAutofocus = MediumEditor.Extension.extend({
     if (!this.getEditorElements()[0].children.length) {
       this.getEditorElements()[0].focus();
     } else {
+      console.log("object");
       this.base.selectElement(this.getEditorElements()[0].children[0]);
       MediumEditor.selection.clearSelection(document, true);
     }

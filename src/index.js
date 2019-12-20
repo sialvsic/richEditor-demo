@@ -28,16 +28,38 @@ const editor = new MediumEditor(elements, {
   }
 });
 
+const firstEditor = editor.elements[0];
+
 function hideInsert() {
-  const rootEditor = editor.elements[0];
-  if (rootEditor.querySelectorAll(".medium-insert-menu").length !== 0) {
-    const node = rootEditor.querySelectorAll(".medium-insert-menu")[0];
-    node.classList.remove("show");
+  const rootEditor = firstEditor;
+  const insertMenuNode = rootEditor.querySelector(".medium-insert-menu");
+  if (insertMenuNode.length !== 0) {
+    insertMenuNode && insertMenuNode.classList.remove("show");
   }
 }
 
+function elementIsNotInEditor(ele) {
+  const array = Array.from(ele);
+  for (let index = 0; index < array.length; index++) {
+    if (
+      array[index].classList &&
+      array[index].classList.value.includes("medium-editor-element")
+    ) {
+      return false;
+    }
+  }
+  return true;
+}
+
+document.addEventListener("click", e => {
+  if (elementIsNotInEditor(e.path)) {
+    hideInsert();
+  }
+});
+
 function showInsert() {
   const targetNode = window.getSelection().focusNode;
+  console.log(targetNode);
 
   if (!targetNode || targetNode.nodeType === 3) {
     hideInsert();
@@ -45,11 +67,7 @@ function showInsert() {
   }
 
   //临时过滤点击为编辑器
-  if (
-    //纯文本节点
-    targetNode.nodeType !== 3 &&
-    targetNode.className.includes("medium-editor-element")
-  ) {
+  if (targetNode.className.includes("medium-editor-element")) {
     return;
   }
 
@@ -57,46 +75,38 @@ function showInsert() {
     top: targetNode.offsetTop
   };
 
-  //遍历查找有没有insert的dom，如果没有的化就是插入，如果有忽略
+  //遍历查找有没有insert的dom，如果没有的话就是插入，如果有忽略
+  const rootEditor = firstEditor;
+  const insertMenuNode = rootEditor.querySelector(".medium-insert-menu");
 
-  const rootEditor = editor.elements[0];
-
-  if (rootEditor.querySelectorAll(".medium-insert-menu").length !== 0) {
+  if (insertMenuNode && insertMenuNode.length !== 0) {
     //如果隐藏则显示
-    const node = rootEditor.querySelectorAll(".medium-insert-menu")[0];
-
-    if (node.classList.value.indexOf("show") === -1) {
-      node.classList.add("show");
+    if (insertMenuNode.classList.value.indexOf("show") === -1) {
+      insertMenuNode.classList.add("show");
     }
-    node.style = `top: ${position.top}px`;
+    insertMenuNode.style = `top: ${position.top}px`;
   } else {
     let el = document.createElement("div");
     let span = document.createElement("span");
     span.innerText = "img";
+
     el.classList.add("medium-insert-menu");
-    el.classList.add("test");
     el.setAttribute("contenteditable", false);
 
     el.appendChild(span);
     rootEditor.appendChild(el);
 
-    const node = rootEditor.querySelectorAll(".medium-insert-menu")[0];
-
-    if (node.classList.value.indexOf("show") === -1) {
-      node.classList.add("show");
-      node.style = `top: ${position.top}px`;
+    if (
+      insertMenuNode &&
+      insertMenuNode.classList.value.indexOf("show") === -1
+    ) {
+      insertMenuNode.classList.add("show");
+      insertMenuNode.style = `top: ${position.top}px`;
     }
   }
 }
 
-// editor.subscribe("editableInput", function(event, editable) {
-//   // Do some work
-//   console.log("Do some work");
-//   // showInsert();
-// });
-
 editor.subscribe("editableKeyup", function(event, editable) {
-  // appendFirst();
   showInsert();
 });
 

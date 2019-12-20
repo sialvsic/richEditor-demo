@@ -32,8 +32,6 @@ const editor = new MediumEditor(elements, {
 });
 
 $(function() {
-  console.log("object");
-  console.log($(".editable"));
   $(".editable").mediumInsert({
     editor: editor
   });

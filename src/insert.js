@@ -12,24 +12,24 @@
   if (typeof define === 'function' && define.amd) {
       define(['jquery', 'handlebars/runtime', 'medium-editor', 'blueimp-file-upload', 'jquery-sortable'], factory);
   } else if (typeof module === 'object' && module.exports && false) {
-      module.exports = function (jQuery) {
-          if (typeof window === 'undefined') {
-              throw new Error("medium-editor-insert-plugin runs only in a browser.")
-          }
+    //   module.exports = function (jQuery) {
+    //       if (typeof window === 'undefined') {
+    //           throw new Error("medium-editor-insert-plugin runs only in a browser.")
+    //       }
 
-          if (jQuery === undefined) {
-              jQuery = require('jquery');
-          }
-          window.jQuery = jQuery;
+    //       if (jQuery === undefined) {
+    //           jQuery = require('jquery');
+    //       }
+    //       window.jQuery = jQuery;
 
-          Handlebars = require('handlebars/runtime');
-          MediumEditor = require('medium-editor');
-          require('jquery-sortable');
-          require('blueimp-file-upload');
+    //       Handlebars = require('handlebars/runtime');
+    //       MediumEditor = require('medium-editor');
+    //       require('jquery-sortable');
+    //       require('blueimp-file-upload');
 
-          factory(jQuery, Handlebars, MediumEditor);
-          return jQuery;
-      };
+    //       factory(jQuery, Handlebars, MediumEditor);
+    //       return jQuery;
+    //   };
   } else {
       factory(jQuery, Handlebars, MediumEditor);
   }
@@ -164,6 +164,7 @@ return "<div class=\"medium-insert-images-toolbar medium-editor-toolbar medium-t
   + "    </ul>\n</div>\n\n"
   + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.actions : depth0),{"name":"if","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
 },"useData":true});
+
 ;(function ($, window, document, undefined) {
 
   'use strict';
@@ -180,7 +181,7 @@ return "<div class=\"medium-insert-images-toolbar medium-editor-toolbar medium-t
       };
 
   /**
-   * Capitalize first character
+   * Capitalize first character 最大化首字母
    *
    * @param {string} str
    * @return {string}
@@ -226,6 +227,7 @@ return "<div class=\"medium-insert-images-toolbar medium-editor-toolbar medium-t
       this._name = pluginName;
 
       // Extend editor's functions
+      // 扩展编辑器的方法
       if (this.options && this.options.editor) {
           if (this.options.editor._serialize === undefined) {
               this.options.editor._serialize = this.options.editor.serialize;
@@ -827,7 +829,7 @@ return "<div class=\"medium-insert-images-toolbar medium-editor-toolbar medium-t
 
 })(jQuery, window, document);
 
-; (function ($, window, document, undefined) {
+;(function ($, window, document, undefined) {
 
   'use strict';
 
@@ -1580,7 +1582,7 @@ return "<div class=\"medium-insert-images-toolbar medium-editor-toolbar medium-t
 
 /*global MediumEditor*/
 
-; (function ($, window, document, Util, undefined) {
+;(function ($, window, document, Util, undefined) {
 
   'use strict';
 
@@ -2367,4 +2369,5 @@ return "<div class=\"medium-insert-images-toolbar medium-editor-toolbar medium-t
   };
 
 })(jQuery, window, document, MediumEditor.util);
+
 }));

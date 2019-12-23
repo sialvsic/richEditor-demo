@@ -39,4 +39,9 @@
   left: 40px;
   top: -0px;
   width: 400px;
+  visibility: hidden;
+}
+
+.inline-tooltip-menu.open {
+  visibility: visible;
 }

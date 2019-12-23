@@ -33,8 +33,10 @@ const firstEditor = editor.elements[0];
 function hideInsert() {
   const rootEditor = firstEditor;
   const insertMenuNode = rootEditor.querySelector(".medium-insert-menu");
+  const tooltipNode = rootEditor.querySelector(".inline-tooltip-menu");
   if (insertMenuNode && insertMenuNode.length !== 0) {
     insertMenuNode.classList.remove("show");
+    tooltipNode.classList.remove("open");
   }
 }
 
@@ -59,7 +61,7 @@ document.addEventListener("click", e => {
 
 function showInsert() {
   const targetNode = window.getSelection().focusNode;
-  console.log(targetNode);
+  // console.log(targetNode);
 
   if (!targetNode || targetNode.nodeType === 3) {
     hideInsert();
@@ -78,12 +80,16 @@ function showInsert() {
   //遍历查找有没有insert的dom，如果没有的话就是插入，如果有忽略
   const rootEditor = firstEditor;
   const insertMenuNode = rootEditor.querySelector(".medium-insert-menu");
+  const tooltipNode = rootEditor.querySelector(".inline-tooltip-menu");
 
   if (insertMenuNode && insertMenuNode.length !== 0) {
     //如果隐藏则显示
     if (insertMenuNode.classList.value.indexOf("show") === -1) {
       insertMenuNode.classList.add("show");
     }
+
+    //需要先关闭tooltip
+    tooltipNode.classList.remove("open");
     insertMenuNode.style = `top: ${position.top}px`;
   } else {
     let el = document.createElement("div");
@@ -122,9 +128,22 @@ function showInsert() {
     el.classList.add("medium-insert-menu");
     el.setAttribute("contenteditable", false);
 
+    inline.addEventListener("click", event => {
+      console.log("tooltip click");
+      event.stopPropagation();
+    });
+
     el.addEventListener("click", event => {
-      // const node = event.target;
       console.log("click");
+
+      //
+      const node = document.querySelector(".inline-tooltip-menu");
+      if (node.classList.value.includes("open")) {
+        node.classList.remove("open");
+      } else {
+        node.classList.add("open");
+      }
+
       event.stopPropagation();
     });
 

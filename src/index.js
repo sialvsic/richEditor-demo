@@ -33,26 +33,26 @@ const firstEditor = editor.elements[0];
 function hideInsert() {
   const rootEditor = firstEditor;
   const insertMenuNode = rootEditor.querySelector(".medium-insert-menu");
-  if (insertMenuNode.length !== 0) {
-    insertMenuNode && insertMenuNode.classList.remove("show");
+  if (insertMenuNode && insertMenuNode.length !== 0) {
+    insertMenuNode.classList.remove("show");
   }
 }
 
-function elementIsNotInEditor(ele) {
-  const array = Array.from(ele);
-  for (let index = 0; index < array.length; index++) {
-    if (
-      array[index].classList &&
-      array[index].classList.value.includes("medium-editor-element")
-    ) {
+function elementIsNotInEditor(node) {
+  if (!node) {
+    return true;
+  }
+
+  while (node.parentElement !== null) {
+    if (node.classList.value.includes("medium-editor-element")) {
       return false;
     }
+    node = node.parentElement;
   }
-  return true;
 }
 
 document.addEventListener("click", e => {
-  if (elementIsNotInEditor(e.path)) {
+  if (elementIsNotInEditor(e.target)) {
     hideInsert();
   }
 });
@@ -88,12 +88,50 @@ function showInsert() {
   } else {
     let el = document.createElement("div");
     let span = document.createElement("span");
-    span.innerText = "img";
+    span.innerText = "x";
+
+    //inline tooltip menu
+    let inline = document.createElement("div");
+    inline.classList.add("inline-tooltip-menu");
+
+    //创建image选项
+    const inlineMenuImage = document.createElement("button");
+    inlineMenuImage.innerText = "image";
+    inline.appendChild(inlineMenuImage);
+
+    //创建search选项
+    const inlineMenuSearch = document.createElement("button");
+    inlineMenuSearch.innerText = "Search";
+    inline.appendChild(inlineMenuSearch);
+
+    //创建video选项
+    const inlineMenuVideo = document.createElement("button");
+    inlineMenuVideo.innerText = "Video";
+    inline.appendChild(inlineMenuVideo);
+
+    //创建newLine选项
+    const inlineMenuNewLine = document.createElement("button");
+    inlineMenuNewLine.innerText = "newLine";
+    inline.appendChild(inlineMenuNewLine);
+
+    //创建Embed选项
+    const inlineMenuEmbed = document.createElement("button");
+    inlineMenuEmbed.innerText = "Embed";
+    inline.appendChild(inlineMenuEmbed);
 
     el.classList.add("medium-insert-menu");
     el.setAttribute("contenteditable", false);
 
+    el.addEventListener("click", event => {
+      // const node = event.target;
+      console.log("click");
+      event.stopPropagation();
+    });
+
+    // const div = `<div style=''> this is </div>`;
     el.appendChild(span);
+    el.appendChild(inline);
+
     rootEditor.appendChild(el);
 
     if (
@@ -107,10 +145,13 @@ function showInsert() {
 }
 
 editor.subscribe("editableKeyup", function(event, editable) {
+  console.log("editableKeyup");
   showInsert();
 });
 
 editor.subscribe("editableClick", function(event, editable) {
+  console.log("editableClick");
+
   showInsert();
 });
 

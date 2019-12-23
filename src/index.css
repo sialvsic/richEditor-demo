@@ -21,6 +21,7 @@
 
 .medium-editor-placeholder:after {
   margin-top: 0 !important;
+  z-index: -1;
 }
 
 .medium-insert-menu {
@@ -31,4 +32,11 @@
 .show {
   left: -40px;
   visibility: visible;
+}
+
+.inline-tooltip-menu {
+  position: absolute;
+  left: 40px;
+  top: -0px;
+  width: 400px;
 }

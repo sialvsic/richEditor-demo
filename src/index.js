@@ -28,7 +28,15 @@ const editor = new MediumEditor(elements, {
   }
 });
 
+console.log(editor);
 const firstEditor = editor.elements[0];
+
+let el = document.createElement("div");
+let span = document.createElement("span");
+span.innerText = "x";
+firstEditor.appendChild(span);
+
+editor.addElements(el);
 
 function hideInsert() {
   const rootEditor = firstEditor;
@@ -68,7 +76,7 @@ function showInsert() {
     return;
   }
 
-  //临时过滤点击为编辑器
+  //过滤点击为编辑器
   if (targetNode.className.includes("medium-editor-element")) {
     return;
   }
